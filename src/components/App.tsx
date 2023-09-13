@@ -1,10 +1,10 @@
-import { MyComponent } from "./MyComponent";
 import "./App.css";
+import { RecipeCard } from "./RecipeCard";
 
 function App() {
     return (
         <div className="App">
-            <MyComponent />
+            <RecipeCard />
         </div>
     );
 }
