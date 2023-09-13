@@ -1,11 +1,15 @@
 import axios from "axios";
-import { apiBaseURL } from "./apiBaseUrl";
+import { apiBaseUrl } from "./apiBaseUrl";
 import { useEffect } from "react";
 export function RecipeCard(): JSX.Element {
     async function getAllRecipes() {
-        const response = await axios.get(`${apiBaseURL}/recipes`);
-        const allRecipes = response.data;
-        console.log(allRecipes);
+        try {
+            const response = await axios.get(apiBaseUrl + "/recipes");
+            const allRecipes = response.data;
+            console.log(allRecipes);
+        } catch (error) {
+            console.error(error);
+        }
     }
     useEffect(() => {
         getAllRecipes();
