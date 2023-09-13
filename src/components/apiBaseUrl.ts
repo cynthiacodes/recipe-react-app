@@ -1,1 +1,3 @@
-export const apiBaseURL = process.env.REACT_APP_API_BASE;
+export const apiBaseUrl = import.meta.env.PROD
+    ? "https://ck-recipe-server.onrender.com"
+    : "http://localhost:4000";
