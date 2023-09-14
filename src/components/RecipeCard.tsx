@@ -76,7 +76,7 @@ export function RecipeCard(): JSX.Element {
         <>
             <SimpleGrid
                 spacing={4}
-                templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+                templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
             >
                 {recipeCards}
             </SimpleGrid>
