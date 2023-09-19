@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Heading, Stack } from "@chakra-ui/react";
 import "./App.css";
 import { RecipeCard } from "./RecipeCard";
+import { NewRecipe } from "./NewRecipe";
 
 function App() {
     return (
@@ -10,8 +11,11 @@ function App() {
                     Recipe App
                 </Heading>
                 <Stack align={"center"}>
-                    <Button>Add New Recipe</Button>
+                    <Button onChange={handleAddRecipeClick}>
+                        Add New Recipe
+                    </Button>
                 </Stack>
+                <NewRecipe />
             </Box>
             <RecipeCard />
         </Grid>
