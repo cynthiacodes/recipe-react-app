@@ -14,16 +14,10 @@ import {
     Text,
     useBreakpointValue,
 } from "@chakra-ui/react";
+import { RecipeWithId } from "./Interface";
 
-interface Recipe {
-    id: number;
-    title: string;
-    meal_type: string;
-    cuisine: string;
-    video_url: string;
-}
 export function RecipeCard(): JSX.Element {
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
+    const [recipes, setRecipes] = useState<RecipeWithId[]>([]);
     async function getAllRecipes() {
         try {
             const response = await axios.get(apiBaseUrl + "/recipes");
