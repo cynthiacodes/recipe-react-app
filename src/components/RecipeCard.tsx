@@ -15,6 +15,7 @@ import {
     useBreakpointValue,
 } from "@chakra-ui/react";
 import { RecipeWithId } from "./Interface";
+import React from "react";
 
 export function RecipeCard(): JSX.Element {
     const [recipes, setRecipes] = useState<RecipeWithId[]>([]);

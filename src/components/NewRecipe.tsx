@@ -7,6 +7,7 @@ import {
     Input,
     Select,
 } from "@chakra-ui/react";
+import React from "react";
 
 const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack"];
 
@@ -47,7 +48,6 @@ export function NewRecipe() {
                 placeholder="Select Meal Type"
                 name="meal_type"
                 value={newRecipe.meal_type}
-                onChange={handleFormInput}
             >
                 {mealTypes.map((mealtype, index) => (
                     <option key={index}>{mealtype}</option>
