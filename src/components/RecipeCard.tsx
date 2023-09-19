@@ -1,6 +1,3 @@
-import axios from "axios";
-import { apiBaseUrl } from "./apiBaseUrl";
-import { useEffect, useState } from "react";
 import {
     Button,
     ButtonGroup,
@@ -14,8 +11,10 @@ import {
     Text,
     useBreakpointValue,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { RecipeWithId } from "./Interface";
-import React from "react";
+import { apiBaseUrl } from "./apiBaseUrl";
 
 export function RecipeCard(): JSX.Element {
     const [recipes, setRecipes] = useState<RecipeWithId[]>([]);
