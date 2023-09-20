@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Recipe } from "./Interface";
+import { apiBaseUrl } from "./apiBaseUrl";
+import axios from "axios";
 
 const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack"];
 
@@ -43,9 +45,16 @@ export function NewRecipe(props: ModalProps) {
         console.log("Form Input", newRecipe);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("submitted", newRecipe);
+        alert("The recipe has been submitted 🍽");
+        const newRecipeData: Recipe = {
+            title: newRecipe.title,
+            meal_type: newRecipe.meal_type,
+            cuisine: newRecipe.cuisine,
+            video_url: newRecipe.video_url,
+        };
+        await axios.post(`${apiBaseUrl}/recipes`, newRecipeData);
     };
 
     return (
@@ -67,26 +76,25 @@ export function NewRecipe(props: ModalProps) {
                                     value={newRecipe.title}
                                     onChange={handleFormInput}
                                 />
-                            </FormControl>
-                            <Select
-                                placeholder="Select Meal Type"
-                                name="meal_type"
-                                value={newRecipe.meal_type}
-                                onChange={handleFormInput}
-                            >
-                                {mealTypes.map((mealtype, index) => (
-                                    <option key={index}>{mealtype}</option>
-                                ))}
-                            </Select>
-                            <FormControl isRequired>
+
+                                <Select
+                                    placeholder="Select Meal Type"
+                                    name="meal_type"
+                                    value={newRecipe.meal_type}
+                                    onChange={handleFormInput}
+                                >
+                                    {mealTypes.map((mealtype, index) => (
+                                        <option key={index}>{mealtype}</option>
+                                    ))}
+                                </Select>
+
                                 <Input
                                     placeholder="Cuisine"
                                     name="cuisine"
                                     value={newRecipe.cuisine}
                                     onChange={handleFormInput}
                                 />
-                            </FormControl>
-                            <FormControl isRequired>
+
                                 <Input
                                     placeholder="Video Url"
                                     name="video_url"
