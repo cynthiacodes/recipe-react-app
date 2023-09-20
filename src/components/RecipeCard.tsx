@@ -12,27 +12,31 @@ import {
     useBreakpointValue,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { RecipeWithId } from "./Interface";
 import { apiBaseUrl } from "./apiBaseUrl";
 
-export function RecipeCard(): JSX.Element {
-    const [recipes, setRecipes] = useState<RecipeWithId[]>([]);
-    async function getAllRecipes() {
+interface RecipeCardProps {
+    recipes: RecipeWithId[];
+    getAllRecipes(): Promise<void>;
+}
+export function RecipeCard({
+    recipes,
+    getAllRecipes,
+}: RecipeCardProps): JSX.Element {
+    const handleVideoUrl = (videoUrl: string) => {
+        window.open(videoUrl);
+    };
+
+    const handleDelete = async (recipeId: number) => {
         try {
-            const response = await axios.get(apiBaseUrl + "/recipes");
-            const allRecipes = response.data;
-            setRecipes(allRecipes);
+            const response = await axios.delete(
+                `${apiBaseUrl}/recipes/${recipeId}`
+            );
+            getAllRecipes();
+            console.log("Deleted recipe", response.data);
         } catch (error) {
             console.error(error);
         }
-    }
-    useEffect(() => {
-        getAllRecipes();
-    }, []);
-
-    const handleVideoUrl = (videoUrl: string) => {
-        window.open(videoUrl);
     };
     const maxCardWidth = useBreakpointValue({ base: "sm", md: "md", lg: "xl" });
     const recipeCards = recipes.map((recipe) => (
@@ -59,7 +63,13 @@ export function RecipeCard(): JSX.Element {
                     <Button variant="ghost" colorScheme="teal" px={2} mx={1}>
                         Edit
                     </Button>
-                    <Button variant="ghost" colorScheme="teal" px={2} mx={1}>
+                    <Button
+                        variant="ghost"
+                        colorScheme="teal"
+                        px={2}
+                        mx={1}
+                        onClick={() => handleDelete(recipe.id)}
+                    >
                         Delete
                     </Button>
                 </ButtonGroup>
