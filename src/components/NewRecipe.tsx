@@ -19,11 +19,12 @@ import axios from "axios";
 
 const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack"];
 
-interface ModalProps {
+interface NewRecipeProps {
     isOpen: boolean;
     onClose: () => void;
+    getAllRecipes(): Promise<void>;
 }
-export function NewRecipe(props: ModalProps) {
+export function NewRecipe({ isOpen, onClose, getAllRecipes }: NewRecipeProps) {
     const [newRecipe, setNewRecipe] = useState<Recipe>({
         title: "",
         meal_type: "",
@@ -55,11 +56,12 @@ export function NewRecipe(props: ModalProps) {
             video_url: newRecipe.video_url,
         };
         await axios.post(`${apiBaseUrl}/recipes`, newRecipeData);
+        getAllRecipes();
     };
 
     return (
         <>
-            <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>
